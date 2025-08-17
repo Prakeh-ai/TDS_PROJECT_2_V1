@@ -1,0 +1,3 @@
+GENAI_API_KEY=AIzaSyBbPfHcngEqnoU6Zo0YDkZJLWyDVCpnpIc
+NGROK_AUTHTOKEN=2xb5iTnlpUuZcVKvFj5jxJEoCjR_4wqcLYNUrD4vZuhHgvjCf
+# You can add more variables as needed

@@ -28,7 +28,25 @@ fi
 echo "Activating virtual environment..."
 # Activate venv depending on shell
 source venv/bin/activate
+# Google API Key
+if [ -n "$GENAI_API_KEY" ]; then
+    read -p "GENAI_API_KEY is already set. Do you want to change it? (y/n): " change_key
+    if [[ "$change_key" =~ ^[Yy]$ ]]; then
+        read -p "Enter your GENAI API key: " GENAI_API_KEY
+    fi
+else
+    read -p "Enter your GENAI API key: " GENAI_API_KEY
+fi
+export GENAI_API_KEY=$GENAI_API_KEY
 
+export GENAI_API_KEY_1="$GENAI_API_KEY"
+export GENAI_API_KEY_2="$GENAI_API_KEY"
+export GENAI_API_KEY_3="$GENAI_API_KEY"
+# Check if GENAI_API_KEY is set
+if [ -z "$GENAI_API_KEY" ]; then
+    echo "Error: GENAI_API_KEY is not set. Please set it before running the script."
+    exit 1
+fi
 # ngrok Auth Token
 if [ -z "$NGROK_AUTHTOKEN" ]; then
     read -p "Enter your ngrok authtoken: " NGROK_AUTHTOKEN
@@ -84,4 +102,4 @@ echo -e "\nServer should be ready now."
 
 # ================= START NGROK (FOREGROUND) =================
 echo "Starting ngrok tunnel on port 8000..."
-$NGROK_BIN http 8000
+$NGROK_BIN http --url=wanted-drum-centrally.ngrok-free.app 8000

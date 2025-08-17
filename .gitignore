@@ -6,5 +6,9 @@ deepseek.py
 test.py
 main1.py
 llm_parser.py
+README.md
+uploads/
+sample_questions/
+photos/
 __pycache__/*.pyc
 deepseek.py
