@@ -40,12 +40,12 @@ async def run_python_code(code: str, libraries: List[str], folder: str = "upload
             ]
             result = subprocess.run(check_cmd)
             if result.returncode != 0:  # not installed
-                log_to_file(f"📦 Installing {lib} ...")
+                log_to_file(f"Installing {lib} ...")
                 subprocess.check_call([python_exec, "-m", "pip", "install", lib])
             else:
                 log_to_file(f"✅ {lib} already installed.")
         except Exception as install_error:
-            error_message = f"❌ Failed to install library '{lib}':\n{install_error}"
+            error_message = f"Failed to install library '{lib}':\n{install_error}"
             log_to_file(error_message)
             return {"code": 0, "output": error_message}
 
@@ -71,15 +71,15 @@ async def run_python_code(code: str, libraries: List[str], folder: str = "upload
         )
 
         if result.returncode == 0:
-            success_message = f"✅ Code executed successfully:\n{result.stdout}"
+            success_message = f"Code executed successfully:\n{result.stdout}"
             log_to_file(success_message)
             return {"code": 1, "output": result.stdout}
         else:
-            error_message = f"❌ Execution error:\n{result.stderr}"
+            error_message = f"Execution error:\n{result.stderr}"
             log_to_file(error_message)
             return {"code": 0, "output": error_message}
 
     except Exception as e:
-        error_details = f"❌ Error during code execution:\n{traceback.format_exc()}"
+        error_details = f"Error during code execution:\n{traceback.format_exc()}"
         log_to_file(error_details)
         return {"code": 0, "output": error_details}

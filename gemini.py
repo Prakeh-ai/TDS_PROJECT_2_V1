@@ -6,7 +6,7 @@ from api_key_rotator import get_api_key
 
 MODEL_NAME = "gemini-2.5-pro"
 
-# Give response in JSON format
+
 generation_config = genai.types.GenerationConfig(
     response_mime_type="application/json"
 )
@@ -28,10 +28,8 @@ async def send_with_rotation(prompt, session_id, system_prompt):
             continue
 
 
-# Store chat sessions for both parsing and answering
 parse_chat_sessions = {}
 
-# Get or create a persistent chat session for a given session_id.
 async def get_chat_session(sessions_dict, session_id, system_prompt, model_name=MODEL_NAME):
     if session_id not in sessions_dict:
         model = genai.GenerativeModel(
@@ -43,9 +41,7 @@ async def get_chat_session(sessions_dict, session_id, system_prompt, model_name=
         sessions_dict[session_id] = chat    
     return sessions_dict[session_id]
 
-# ------------------------
-# PARSE QUESTION FUNCTION
-# ------------------------
+
 async def parse_question_with_llm(question_text=None, uploaded_files=None, session_id="default_parse", retry_message=None, folder="uploads"):
     """
     Parse question with persistent chat session.
